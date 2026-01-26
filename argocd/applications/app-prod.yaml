@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR_USERNAME/idp-gitops.git
+    repoURL: https://github.com/smithddevon/idp-gitops.git
     targetRevision: main
     path: apps/overlays/prod
   destination:
