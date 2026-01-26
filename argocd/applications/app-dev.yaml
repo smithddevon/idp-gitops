@@ -1,20 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: idp-app-dev
+  name: hello-idp-dev
   namespace: argocd
 spec:
   project: default
+
   source:
-    repoURL: https://github.com/YOUR_USERNAME/idp-gitops.git
-    targetRevision: main 
-    path: apps/overlays/dev
+    repoURL: https://github.com/smithddevon/idp-gitops.git
+    targetRevision: main
+    path: apps/hello-idp/overlays/dev
+
   destination:
     server: https://kubernetes.default.svc
     namespace: dev
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions: 
-      - Createnamespace=true
+    syncOptions:
+      - CreateNamespace=true
