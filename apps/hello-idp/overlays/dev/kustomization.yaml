@@ -6,5 +6,5 @@ resources:
 
 images:
   - name: hello-idp
-    newName: us-central1-docker.pkg.dev/PROJECT_ID/idp-artifacts/hello-idp
+    newName: us-central1-docker.pkg.dev/internal-dev-platform/idp-artifacts/hello-idp
     newTag: dev-latest
