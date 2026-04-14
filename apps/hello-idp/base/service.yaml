@@ -1,11 +1,11 @@
-apiVersion: v1
-kind: Service
+apiVersion: v1                    # Core Kubernetes API group for Services
+kind: Service                     # Service exposes pods to other pods or clients
 metadata:
-  name: hello-idp
+  name: hello-idp                 # Name of the service in the cluster (used by other pods or tools to ref this service)
 spec:
-  type: ClusterIP
-  selector:
-    app: hello-idp
+  type: ClusterIP                 # Exposes the Service only within the cluster for internal traffic
+  selector:                       # Finds all pods with this label (must match template.metadata.labels in Deployment)
+    app: hello-idp                # This is how the Service knows which pods to route traffic to
   ports:
-    - port: 80
-      targetPort: 8080
+    - port: 80                    # Port that the Service exposes inside the cluster (other pods can connect to hello-idp:80)
+      targetPort: 8080            # Port on the pod (matches containerPort in Deployment) (Routes traffic from Service → pods correctly)

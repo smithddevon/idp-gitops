@@ -1,19 +1,19 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
+apiVersion: apps/v1                           # Kubernetes API
+kind: Deployment                              # Define resource type
+metadata:                                     # Deployment name that will show in cluster
   name: hello-idp
-spec:
-  replicas:  1
+spec:                                         # This block defines desired state
+  replicas:  1                                # This defines number of pod replicas
   selector:
-    matchLabels:
+    matchLabels:                              # This block tells Deployment which pods to manage with (Manage pods identified with this label name)
       app: hello-idp
-  template:
+  template:                                   # Blueprint for the pods the Deployment creates (It defines the pod structure and labels for each pod created)
     metadata:
-      labels:
-        app: hello-idp 
+      labels:                                 # Labels here assign the identity to each pod created from the template
+        app: hello-idp                        # These labels connect back to the selector so the Deployment knows these pods belong to it
     spec:
       containers:
-        - name: hello-idp
-          image: hello-idp
+        - name: hello-idp                     # This block defines what runs inside the pod. Each container is part of the pod template
+          image: hello-idp                    # Image specifies which application version runs. Deployment uses this to create pods that actually do the work
           ports:
-            - containerPort: 8080
+            - containerPort: 8080             # Exposed port inside the container. Needed so Services or other pods can reach this container

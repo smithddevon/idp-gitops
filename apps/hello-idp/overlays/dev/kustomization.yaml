@@ -1,10 +1,10 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1       # Kustomize API version
+kind: Kustomization                               # Declares file as Kustomize
 
-resources:
-- ../../base
+resources:                                        # This points to base folder
+- ../../base                                      # Uses the base kustomization (deployment and service) and applies dev specific overrides on top
 
 images:
 - name: hello-idp
   newName: us-central1-docker.pkg.dev/internal-dev-platform/idp-artifacts/hello-idp
-  newTag: 636569c0e1d3522229da2cde78887d91a3d4f514
+  newTag: 636569c0e1d3522229da2cde78887d91a3d4f514 # Updated by CI pipeline; Git change triggers ArgoCD to deploy new app version

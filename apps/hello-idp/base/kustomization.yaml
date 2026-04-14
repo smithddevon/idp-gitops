@@ -1,6 +1,6 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1     # Kustomize API version
+kind: Kustomization                             # Defines file as a Kustomization
 
-resources:
+resources:                                      # Kustomize combines these Kubernetes file into deployment package that ArgoCD can deploy
   - deployment.yaml
   - service.yaml

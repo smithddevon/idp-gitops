@@ -1,23 +1,24 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: argoproj.io/v1alpha1                              # Argo CD Application CRD API version
+kind: Application                                             # Argo CD Application CRD API version
 metadata:
-  name: hello-idp-dev
-  namespace: argocd
+  name: hello-idp-dev                                         # Name of this app inside Argo CD
+  namespace: argocd                                           # Namespace where Argo CD is installed (Application CR lives here)
 spec:
-  project: default
+  project: default                                            # Argo CD project (logical grouping / RBAC boundary)
 
   source:
-    repoURL: https://github.com/smithddevon/idp-gitops.git
-    targetRevision: main
-    path: apps/hello-idp/overlays/dev
+    repoURL: https://github.com/smithddevon/idp-gitops.git    # Git repo Argo CD watches
+    targetRevision: main                                      # Branch, tag, or commit to track
+    path: apps/hello-idp/overlays/dev                         # Path inside repo (this is the Kustomize dev overlay)
 
   destination:
-    server: https://kubernetes.default.svc
-    namespace: dev
+    server: https://kubernetes.default.svc                    # Target cluster (in-cluster Kubernetes API)
+    namespace: dev                                            # Namespace where the app will be deployed
 
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated:                                                # Enables automatic syncing (GitOps behavior)
+      prune: true                                             # Deletes resources removed from Git
+      selfHeal: true                                          # Re-applies changes if cluster drifts from Git
+
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=true                                  # Automatically create the 'dev' namespace if it doesn't exist
